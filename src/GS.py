@@ -49,8 +49,6 @@ class GS_Market(object):
             for a_idx, p_idx in enumerate(matching):
                 reward = arms[a_idx].sample(p_idx)
                 players[p_idx].update(a_idx, reward, self.t)
-            # for p_idx in range(self.num_players):
-            #     players[p_idx].update_ucb(self.t)
 
         return matching
 

@@ -9,7 +9,7 @@ from src.player import Player
 
 class Exp_example2():
     '''
-        Experiments with the centralized UCB algorithm
+        Experiments with the centralized UCB algorithm with 2 players and 2 arms
     '''
     
     def __init__(self):

@@ -17,6 +17,9 @@ class GS_Market_(GS_Market):
 
 
 class Exp_example6():
+    '''
+        Experiments with the centralized UCB algorithm with 3 players and 3 arms
+    '''
 
     def __init__(self):
         self.num_players = 3

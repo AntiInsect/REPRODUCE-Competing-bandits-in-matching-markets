@@ -8,7 +8,7 @@ class Arm(object):
         self.mean = mean
         self.var = var
         
-        # for arm, the "ranking" is out of the "target reference"
+        # for arm, the "ranking" is out of the "true reference"
         self.ranking = ranking
 
     def sample(self, p_idx):

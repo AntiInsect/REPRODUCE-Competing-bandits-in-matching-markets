@@ -8,6 +8,9 @@ from src.player import Player
 
 
 class Exp_example7():
+    '''
+        Experiments with the centralized UCB and centrailzed ETC algorithm with 20 players and 20 arms
+    '''
 
     def __init__(self):
         self.num_players = 20
