@@ -19,6 +19,7 @@ class Exp_example7():
         self.trials = 50
         self.arms_var = 1
         self.reward_interval = 0.1
+        
         self.two_side_market = GS_Market(self.num_players, self.num_arms)
 
     def run_example7_UCB(self, optimal=True):

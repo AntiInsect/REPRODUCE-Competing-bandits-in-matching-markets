@@ -20,6 +20,7 @@ class Exp_example2():
         self.trials = 100
         self.freq = 20
         self.delta = np.linspace(0.0, 1.25, self.freq)
+        
         self.two_side_market = GS_Market(self.num_players, self.num_arms)
 
     def run_example2_UCB(self, optimal=True):

@@ -7,7 +7,7 @@ from src.GS import GS_Market
 from src.player import Player
 
 
-class Exp_UCB_ETC(object):
+class Exp_centralized_UCB_ETC(object):
     '''
         Extra experiments with the centralized UCB and centralized ETC algorithm
     '''
@@ -19,29 +19,28 @@ class Exp_UCB_ETC(object):
         self.horizon = 4000
         self.trials = 10
 
-        self.two_side_market = GS_Market(self.num_players, self.num_arms)
-
-        self.arms_mean = np.linspace(0.9, 0, self.num_arms)
         self.players_rankings = np.arange(self.num_arms)
-        self.arms_rankings = np.arange(self.num_players)
-
         self.players = [Player(self.num_arms, self.players_rankings) 
                         for j in range(self.num_players)]
-        self.arms = [Arm(self.num_players, self.arms_mean[j] * np.ones(self.num_players), self.arms_var, self.arms_rankings) 
+
+        self.arms_mean = np.linspace(0.9, 0, self.num_arms)
+        self.arms_rankings = np.arange(self.num_players)
+        self.arms = [Arm(self.num_players, self.arms_mean[j]*np.ones(self.num_players), self.arms_var, self.arms_rankings) 
                         for j in range(self.num_arms)]
         
+        self.two_side_market = GS_Market(self.num_players, self.num_arms)
         self.optimal_matching = self.two_side_market.get_optimal_matching(self.players, self.arms).tolist()
 
         self.regrets_ucb = []
         self.regrets_etc = []
 
 
-    def run_UCB(self, optimal=True):
+    def run_centralized_UCB(self, optimal=True):
 
         regrets = np.zeros([self.num_players, self.horizon])
         
-        string = "optimal" if optimal else "pessimal"
-        for _ in tqdm(range(self.trials), ascii=True, desc="Running the example 7 centralized UCB "+string):
+        # string = "optimal" if optimal else "pessimal"
+        for _ in tqdm(range(self.trials), ascii=True, desc="Running the centralized UCB "):
             regrets_one_trial = [[] for _ in range(self.num_players)]
 
             for _ in range(self.horizon):
@@ -60,11 +59,11 @@ class Exp_UCB_ETC(object):
         regrets /= self.trials
         return regrets
 
-    def run_ETC(self, h, optimal=True):
+    def run_centralized_ETC(self, h, optimal=True):
         regrets = np.zeros([self.num_players, self.horizon])
         
-        string = "optimal" if optimal else "pessimal"
-        for _ in tqdm(range(self.trials), ascii=True, desc="Running the example 7 centralized ETC "+string):
+        # string = "optimal" if optimal else "pessimal"
+        for _ in tqdm(range(self.trials), ascii=True, desc="Running the centralized ETC "):
             regrets_one_trial = [[] for _ in range(self.num_players)]
 
             matching_result = None
@@ -100,11 +99,11 @@ class Exp_UCB_ETC(object):
         regrets /= self.trials
         return regrets
 
-    def run_UCB_ETC(self, explore_rounds):
-        self.regrets_ucb = self.run_UCB()
-        self.regrets_etc = [self.run_ETC(h) for h in explore_rounds]
+    def run_centralized_UCB_ETC(self, explore_rounds):
+        self.regrets_ucb = self.run_centralized_UCB()
+        self.regrets_etc = [self.run_centralized_ETC(h) for h in explore_rounds]
 
-    def plot_UCB_ETC(self):
+    def plot_centralized_UCB_ETC(self, explore_rounds):
         plt.figure(dpi = 200)
 
         plt.plot(np.linspace(0, self.horizon, 10),
@@ -121,7 +120,7 @@ class Exp_UCB_ETC(object):
 
 if __name__ == "__main__":
 
-    exp = Exp_UCB_ETC()
+    exp = Exp_centralized_UCB_ETC()
     explore_rounds = [25, 50, 100, 200]
-    exp.run_UCB_ETC(explore_rounds)
-    exp.plot_UCB_ETC()
+    exp.run_centralized_UCB_ETC(explore_rounds)
+    exp.plot_centralized_UCB_ETC(explore_rounds)

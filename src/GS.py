@@ -42,7 +42,7 @@ class GS_Market(object):
                                             .reshape(self.num_arms, self.num_players)
 
         # get the final result of matching        
-        matching = self.attempt()
+        matching = self.Gale_Shapley()
 
         # update the ucb estimation
         if ucb:
@@ -63,10 +63,10 @@ class GS_Market(object):
         self.arms_rankings = np.array([arms[j].get_ranking() \
                                         for j in range(self.num_arms)], int) \
                                             .reshape(self.num_arms, self.num_players)
-        return self.attempt()
+        return self.Gale_Shapley()
     
 
-    def attempt(self):
+    def Gale_Shapley(self):
         # propose_order records the order players should follow while proposing
         init_propose_order = np.zeros(self.num_players, int)
         propose_order = init_propose_order
@@ -100,3 +100,6 @@ class GS_Market(object):
     
         return np.squeeze(matching)
 
+    def attempt(self):
+        
+        pass

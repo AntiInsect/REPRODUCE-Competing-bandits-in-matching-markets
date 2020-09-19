@@ -15,7 +15,6 @@ class GS_Market_(GS_Market):
         super().reset(players)
         players[self.num_players-1].ucb = np.array([2.3, 0, 0])
 
-
 class Exp_example6():
     '''
         Experiments with the centralized UCB algorithm with 3 players and 3 arms
@@ -27,6 +26,7 @@ class Exp_example6():
         self.horizon = 200
         self.trials = 10
         self.arms_var = 1
+        
         self.two_side_market = GS_Market_(self.num_players, self.num_arms)
 
     def run_example6_UCB(self, optimal=True):
