@@ -99,7 +99,3 @@ class GS_Market(object):
                         propose_order[p_idx] += (1 - (p_idx == a_choice))
     
         return np.squeeze(matching)
-
-    def attempt(self):
-        
-        pass
